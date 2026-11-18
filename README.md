@@ -5,7 +5,7 @@
 RootPath is a gamified web app prototype for tracking offensive security learning: labs and CTF rooms (TryHackMe, HackTheBox), XP and ranks, skills coverage, and a certification roadmap leading to a cybersecurity internship.
 
 ## Live Demo
-- Website: `https://<your-username>.github.io/<repo-name>/`
+- Website: https://imzulkepli.github.io/rootpath_IMS566/
 - Repository: https://github.com/ImZulkepli/rootpath_IMS566
 
 ## Features
