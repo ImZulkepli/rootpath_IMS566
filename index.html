@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="RootPath - log in to track your offensive security labs, CTFs and certifications.">
+  <meta name="author" content="IMS566 Student, UiTM">
+  <title>Login | RootPath</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230d1117'/%3E%3Cpath d='M9 23V9h8a4 4 0 0 1 0 8h-8m7 0 6 6' fill='none' stroke='%23f54c52' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <script src="js/theme.js"></script>
+</head>
+<body>
+  <canvas id="network" aria-hidden="true"></canvas>
+
+  <main class="login-hero d-flex align-items-center py-5">
+    <div class="container">
+      <div class="row align-items-center gy-5 gx-lg-5">
+        <!-- Hero copy -->
+        <header class="col-lg-6 hero-copy">
+          <div class="hero-brand hero-in">Root<span>Path</span></div>
+          <h1 class="hero-title hero-in">Your road<br>to <span class="acc">root.</span></h1>
+          <p class="hero-lead hero-in">Track your cybersecurity learning journey: labs, XP and a certification roadmap in one place.</p>
+          <p class="hero-note hero-in">For learning on legal, authorised labs only (TryHackMe, HackTheBox and your own test machines).</p>
+          <div class="hero-stats hero-in d-none d-md-flex">
+            <div><span class="stat-num" id="statLabs">0</span><span class="stat-label">Labs tracked</span></div>
+            <div><span class="stat-num" id="statCerts">0</span><span class="stat-label">Milestones</span></div>
+            <div><span class="stat-num" id="statRanks">0</span><span class="stat-label">Ranks to earn</span></div>
+          </div>
+        </header>
+
+        <!-- Authentication card -->
+        <div class="col-lg-5 ms-lg-auto">
+        <div class="login-wrap">
+        <section id="authCard" class="card rt-card login-card" aria-label="Authentication">
+          <div class="card-body p-4">
+            <ul class="nav nav-pills nav-fill mb-4" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#loginPane" type="button" role="tab">Login</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#registerPane" type="button" role="tab">Register</button>
+              </li>
+            </ul>
+
+            <div class="tab-content">
+              <!-- Login -->
+              <div class="tab-pane fade show active" id="loginPane" role="tabpanel">
+                <form id="loginForm" novalidate>
+                  <div id="loginMsg" role="alert"></div>
+                  <div class="mb-3">
+                    <label for="loginUser" class="form-label">Username</label>
+                    <input type="text" id="loginUser" class="form-control" autocomplete="username" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="loginPass" class="form-label">Password</label>
+                    <div class="input-group">
+                      <input type="password" id="loginPass" class="form-control" autocomplete="current-password" required>
+                      <button type="button" id="togglePass" class="btn btn-outline-secondary">Show</button>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-rt w-100">Log in</button>
+                </form>
+                <div class="demo-box" aria-label="Demo account">
+                  <div class="demo-title">Demo account</div>
+                  Username: <code id="demoUser"></code><br>
+                  Password: <code id="demoPass"></code>
+                </div>
+              </div>
+
+              <!-- Register -->
+              <div class="tab-pane fade" id="registerPane" role="tabpanel">
+                <form id="registerForm">
+                  <div id="registerMsg" role="alert"></div>
+                  <div class="mb-3">
+                    <label for="regName" class="form-label">Full name</label>
+                    <input type="text" id="regName" class="form-control" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="regUser" class="form-label">Username</label>
+                    <input type="text" id="regUser" class="form-control" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="regPass" class="form-label">Password (min 6 characters)</label>
+                    <input type="password" id="regPass" class="form-control" required>
+                  </div>
+                  <button type="submit" class="btn btn-rt w-100">Create account</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+        </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="rt-footer py-3 text-center">
+    <div class="container">
+      &copy; <span id="year"></span> RootPath
+    </div>
+  </footer>
+
+  <!-- Shown after a successful login -->
+  <div id="accessOverlay" class="access-overlay" role="status" aria-live="polite">
+    <h2>Access granted</h2>
+    <p id="grantName" class="font-mono text-secondary mb-0"></p>
+    <div class="progress"><div class="progress-bar rt-bar"></div></div>
+  </div>
+
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/fx.js"></script>
+  <script src="js/shader.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>
