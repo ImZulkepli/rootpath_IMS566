@@ -6,7 +6,7 @@ RootPath is a gamified web app prototype for tracking offensive security learnin
 
 ## Live Demo
 - Website: `https://<your-username>.github.io/<repo-name>/`
-- Repository: `https://github.com/<your-username>/<repo-name>`
+- Repository: https://github.com/ImZulkepli/rootpath_IMS566
 
 ## Features
 - **Login / Register** landing page with a hero headline ("Your road to root.") and live stat counters, plus error feedback (invalid credentials, short password, duplicate username), an interactive particle-network background and an "Access granted" transition
